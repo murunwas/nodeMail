@@ -68,6 +68,34 @@ app.post('/mail', function (req, res) {
 
 });
 
+app.post('/web', function (req, res) {
+  
+    var mailOptions = {
+      from: '"'+req.body.subject+'" <' + req.body.from + '>',
+      to: "sengani@murunwa.ga",
+      subject: req.body.subject+" sent message from website",
+      html:
+      `<div style="width:100%; padding: 6px;text-align: center">
+      <label style="color: #B4886B;
+      font-weight: bold;
+      display: block;">${req.body.message} sent a diary</label>
+      </div>
+      
+      `
+    };
+  
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.json({ status: false, message: error, data: mailOptions });
+      } else {
+        console.log('Email sent: ' + info.response);
+        res.json({ status: true, message: info.response });
+      }
+    });
+  
+  });
+
 app.listen(port, function () {
   console.log('Our app is running on Port: ' + port);
 });
