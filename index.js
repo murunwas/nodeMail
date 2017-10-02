@@ -24,6 +24,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cors())
 
 
+app.get('/', function(req, res){
+  res.send("Hello Cengy!");
+});
 
 app.get('/hello', function(req, res){
    res.send("Hello World!");
