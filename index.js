@@ -4,6 +4,8 @@ var express = require('express');
 var cors = require('cors')
 var app = express();
 var port = process.env.PORT || 4300;
+var ip = process.env.IP || 'http://localhost';
+
 
 
 
@@ -12,7 +14,7 @@ var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'webcengy@gmail.com',
-    pass: 'demo1221'
+    pass: process.env.pass
   }
 });
 
@@ -49,4 +51,6 @@ app.post('/mail', function(req, res){
    
 });
 
-app.listen(port);
+app.listen(port, function() {
+  console.log('Our app is running on Port: ' + port);
+});
